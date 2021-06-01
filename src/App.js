@@ -6,8 +6,9 @@ const HEIGHT = 3000;
 
 let currentScale = 1;
 
-function onScroll() {
-  const newScale = currentScale * 1.05;
+function onScroll(zoomIn) {
+  const scaleFactor = zoomIn ? 2 : 0.5;
+  const newScale = currentScale * scaleFactor;
   const content = document.getElementById("content");
   const container = document.getElementById("container");
   let scrollLeft = container.scrollLeft;
@@ -15,11 +16,13 @@ function onScroll() {
 
   const currentCenterX = scrollLeft + window.innerWidth / 2;
   const currentCenterY = scrollTop + window.innerHeight / 2;
+  console.log("centers", currentCenterX, currentCenterY);
 
   content.style.transform = `scale(${newScale})`;
 
-  container.scrollLeft = currentCenterX * newScale - window.innerWidth / 2;
-  container.scrollTop = currentCenterY * newScale - window.innerHeight / 2;
+  container.scrollLeft = currentCenterX * scaleFactor - window.innerWidth / 2;
+  container.scrollTop = currentCenterY * scaleFactor - window.innerHeight / 2;
+  console.log("scrollAfter", container.scrollLeft);
   currentScale = newScale;
 }
 
@@ -63,27 +66,16 @@ export default function App() {
       </div>
       <button
         style={{ position: "absolute", top: 0, left: 100 }}
-        onClick={() => onScroll()}
+        onClick={() => onScroll(true)}
       >
-        STUFF
+        ZOOM IN
+      </button>
+      <button
+        style={{ position: "absolute", top: 0, left: 200 }}
+        onClick={() => onScroll(false)}
+      >
+        ZOOM OUT
       </button>
     </div>
   );
-}
-
-function onScrollCenter() {
-  const newScale = currentScale * 1.05;
-  const content = document.getElementById("content");
-  const container = document.getElementById("container");
-  let scrollLeft = container.scrollLeft;
-  let scrollTop = container.scrollTop;
-
-  const currentCenterX = scrollLeft + window.innerWidth / 2;
-  const currentCenterY = scrollTop + window.innerHeight / 2;
-
-  content.style.transform = `scale(${newScale})`;
-
-  container.scrollLeft = currentCenterX * newScale - window.innerWidth / 2;
-  container.scrollTop = currentCenterY * newScale - window.innerHeight / 2;
-  currentScale = newScale;
 }
