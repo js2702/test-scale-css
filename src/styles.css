@@ -1,0 +1,50 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+#stage-container {
+  overflow: hidden;
+  height: 3000px;
+  width: 3000px;
+}
+
+#scroll-container {
+  overflow: "auto";
+  width: "calc(100%)";
+  height: "calc(100vh)";
+  position: "relative";
+}
+
+.vl {
+  border-left: 6px solid green;
+  height: 3000px;
+  transform: translate(-50%, -50%);
+}
+.hl {
+  border-top: 6px solid red;
+  width: 3000px;
+  transform: translate(-50%, -50%);
+}
+
+#container {
+  width: calc(100%);
+  height: calc(100vh);
+  overflow: auto;
+  position: relative;
+}
+
+#content {
+  width: 3000px;
+  height: 3000px;
+  overflow: hidden;
+  transform-origin: 0 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  overflow: auto;
+}
